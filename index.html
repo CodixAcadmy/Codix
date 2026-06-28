@@ -873,7 +873,7 @@
       line-height: 1.6;
     }
 
-    /* ===== COMPUTER SECTION (عصري وجذاب) ===== */
+    /* ===== COMPUTER SECTION ===== */
     .computer-section {
       background: var(--bg-primary);
       padding: 70px 0;
@@ -1015,7 +1015,7 @@
       50% { opacity: 1; transform: scale(1.1); }
     }
 
-    /* ===== VISION (الرؤية المستقبلية) ===== */
+    /* ===== VISION ===== */
     .vision {
       background: var(--bg-secondary);
       border-top: 1px solid rgba(255, 255, 255, 0.02);
@@ -1138,7 +1138,7 @@
       line-height: 1.5;
     }
 
-    /* ===== DIFFERENCE (COMPARISON) ===== */
+    /* ===== DIFFERENCE ===== */
     .difference {
       background: var(--bg-primary);
     }
@@ -1314,7 +1314,7 @@
       color: var(--text-muted);
     }
 
-    /* ===== TOAST NOTIFICATION ===== */
+    /* ===== TOAST ===== */
     #toast {
       position: fixed;
       bottom: 30px;
@@ -1429,7 +1429,8 @@
       margin-bottom: 4px;
     }
 
-    .modal input {
+    .modal input,
+    .modal select {
       width: 100%;
       padding: 12px 16px;
       background: rgba(255, 255, 255, 0.04);
@@ -1440,9 +1441,17 @@
       outline: none;
       transition: 0.3s;
       font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
-    .modal input:focus {
+    .modal select option {
+      background: var(--bg-secondary);
+      color: #fff;
+    }
+
+    .modal input:focus,
+    .modal select:focus {
       border-color: var(--cyan);
       box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
     }
@@ -1862,7 +1871,7 @@
     </div>
   </section>
 
-  <!-- ===== COMPUTER SECTION (عصري وجذاب) ===== -->
+  <!-- ===== COMPUTER SECTION ===== -->
   <section class="computer-section" id="computerSection">
     <div class="container">
       <div class="computer-wrapper" id="computerWrapper">
@@ -1876,7 +1885,7 @@
     </div>
   </section>
 
-  <!-- ===== TRACKS (المسارات بالإنجليزية) ===== -->
+  <!-- ===== TRACKS ===== -->
   <section class="tracks" id="tracks">
     <div class="container">
       <div class="section-header text-center reveal">
@@ -1913,14 +1922,14 @@
         </div>
         <div class="track-card reveal reveal-delay-6">
           <i class="fas fa-graduation-cap"></i>
-          <h4>Baccalaureate Programming</h4>
+          <h4>Baccalaureate</h4>
           <p>مسار مخصص لطلاب البكالوريا، يغطي المنهج والمشاريع المتقدمة.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== COURSES (البرنامج الأساسي) ===== -->
+  <!-- ===== COURSES ===== -->
   <section class="courses" id="courses">
     <div class="container">
       <div class="section-header text-center reveal">
@@ -2105,12 +2114,12 @@
     <span id="toastMessage"></span>
   </div>
 
-  <!-- ===== MODAL (تسجيل) ===== -->
+  <!-- ===== MODAL ===== -->
   <div class="modal-overlay" id="registerModal">
     <div class="modal">
       <button class="modal-close" id="modalClose">&times;</button>
       <h2>📝 سجل الآن</h2>
-      <p class="sub">أدخل بياناتك للانضمام إلى برنامج codix التأسيسي.</p>
+      <p class="sub">أدخل بياناتك واختر الكورس الذي ترغب فيه.</p>
       <form id="registerForm">
         <label>اسم الطالب</label>
         <input type="text" id="regName" placeholder="أحمد محمد" required>
@@ -2129,6 +2138,17 @@
 
         <label>البريد الإلكتروني</label>
         <input type="email" id="regEmail" placeholder="you@example.com" required>
+
+        <label>اختر الكورس</label>
+        <select id="regCourse" required>
+          <option value="">-- اختر الكورس --</option>
+          <option value="UI/UX">UI/UX</option>
+          <option value="Data Analysis">Data Analysis</option>
+          <option value="Frontend">Frontend</option>
+          <option value="Backend">Backend</option>
+          <option value="Basics Programming">Basics Programming</option>
+          <option value="بكالوريا (ثانوية عامة)">بكالوريا (ثانوية عامة)</option>
+        </select>
 
         <button type="submit" class="btn-submit">سجل الآن</button>
       </form>
@@ -2326,8 +2346,9 @@
         const city = document.getElementById('regCity').value.trim();
         const governorate = document.getElementById('regGovernorate').value.trim();
         const email = document.getElementById('regEmail').value.trim();
+        const course = document.getElementById('regCourse').value;
 
-        if (!name || !parentPhone || !studentPhone || !city || !governorate || !email) {
+        if (!name || !parentPhone || !studentPhone || !city || !governorate || !email || !course) {
           showToast('الرجاء ملء جميع الحقول', 'error');
           return;
         }
@@ -2342,7 +2363,8 @@
           student_phone: studentPhone,
           city: city,
           governorate: governorate,
-          email: email
+          email: email,
+          course: course
         };
 
         try {
@@ -2380,7 +2402,7 @@
         });
       }
 
-      // ===== SHOW MODAL ON LOAD (بعد 2 ثانية) =====
+      // ===== SHOW MODAL ON LOAD =====
       setTimeout(() => {
         openModal();
       }, 2000);
