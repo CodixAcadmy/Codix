@@ -1370,12 +1370,14 @@
       background: var(--bg-secondary);
       border: 1px solid var(--border-glass);
       border-radius: var(--radius);
-      max-width: 460px;
+      max-width: 500px;
       width: 100%;
       padding: 36px 32px;
       position: relative;
       box-shadow: var(--shadow-card);
       animation: modalFade 0.3s ease;
+      max-height: 95vh;
+      overflow-y: auto;
     }
 
     @keyframes modalFade {
@@ -1418,7 +1420,7 @@
 
     .modal p.sub {
       color: var(--text-secondary);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       font-size: 0.9rem;
     }
 
@@ -1429,8 +1431,7 @@
       margin-bottom: 4px;
     }
 
-    .modal input,
-    .modal select {
+    .modal input {
       width: 100%;
       padding: 12px 16px;
       background: rgba(255, 255, 255, 0.04);
@@ -1441,19 +1442,72 @@
       outline: none;
       transition: 0.3s;
       font-family: inherit;
-      appearance: none;
-      -webkit-appearance: none;
     }
 
-    .modal select option {
-      background: var(--bg-secondary);
-      color: #fff;
-    }
-
-    .modal input:focus,
-    .modal select:focus {
+    .modal input:focus {
       border-color: var(--cyan);
       box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
+    }
+
+    /* ===== Course Selection Cards ===== */
+    .course-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .course-option {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .course-option:hover {
+      background: rgba(0, 212, 255, 0.05);
+      border-color: rgba(0, 212, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .course-option.selected {
+      border-color: var(--cyan);
+      background: rgba(0, 212, 255, 0.08);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+    }
+
+    .course-option.selected i {
+      color: var(--cyan);
+    }
+
+    .course-option i {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .course-option.selected i {
+      color: var(--cyan);
+    }
+
+    .course-option .check-mark {
+      display: none;
+      color: var(--cyan);
+      font-size: 0.7rem;
+      margin-left: 4px;
+    }
+
+    .course-option.selected .check-mark {
+      display: inline;
     }
 
     .modal .btn-submit {
@@ -1560,6 +1614,9 @@
       .computer-icon-wrap i {
         font-size: 4.5rem;
       }
+      .course-options {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1625,6 +1682,7 @@
       }
       .modal {
         padding: 28px 20px;
+        max-width: 95%;
       }
       .future-tracks {
         flex-direction: column;
@@ -1649,6 +1707,17 @@
       }
       .computer-wrapper h3 {
         font-size: 1.4rem;
+      }
+      .course-options {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .course-option {
+        padding: 10px 6px;
+        font-size: 0.75rem;
+      }
+      .course-option i {
+        font-size: 1.2rem;
       }
     }
 
@@ -1692,6 +1761,17 @@
       .footer-social a {
         width: 38px;
         height: 38px;
+        font-size: 1rem;
+      }
+      .course-options {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+      .course-option {
+        padding: 8px 4px;
+        font-size: 0.7rem;
+      }
+      .course-option i {
         font-size: 1rem;
       }
     }
@@ -2119,7 +2199,7 @@
     <div class="modal">
       <button class="modal-close" id="modalClose">&times;</button>
       <h2>📝 سجل الآن</h2>
-      <p class="sub">أدخل بياناتك واختر الكورس الذي ترغب فيه.</p>
+      <p class="sub">أدخل بياناتك واختر الكورس الذي ترغب فيه بالضغط على البطاقة.</p>
       <form id="registerForm">
         <label>اسم الطالب</label>
         <input type="text" id="regName" placeholder="أحمد محمد" required>
@@ -2140,15 +2220,39 @@
         <input type="email" id="regEmail" placeholder="you@example.com" required>
 
         <label>اختر الكورس</label>
-        <select id="regCourse" required>
-          <option value="">-- اختر الكورس --</option>
-          <option value="UI/UX">UI/UX</option>
-          <option value="Data Analysis">Data Analysis</option>
-          <option value="Frontend">Frontend</option>
-          <option value="Backend">Backend</option>
-          <option value="Basics Programming">Basics Programming</option>
-          <option value="بكالوريا (ثانوية عامة)">بكالوريا (ثانوية عامة)</option>
-        </select>
+        <div class="course-options" id="courseOptions">
+          <div class="course-option" data-value="UI/UX">
+            <i class="fas fa-paint-brush"></i>
+            UI/UX
+            <span class="check-mark">✔</span>
+          </div>
+          <div class="course-option" data-value="Data Analysis">
+            <i class="fas fa-chart-bar"></i>
+            Data Analysis
+            <span class="check-mark">✔</span>
+          </div>
+          <div class="course-option" data-value="Frontend">
+            <i class="fas fa-laptop-code"></i>
+            Frontend
+            <span class="check-mark">✔</span>
+          </div>
+          <div class="course-option" data-value="Backend">
+            <i class="fas fa-server"></i>
+            Backend
+            <span class="check-mark">✔</span>
+          </div>
+          <div class="course-option" data-value="Basics Programming">
+            <i class="fas fa-code"></i>
+            Basics Programming
+            <span class="check-mark">✔</span>
+          </div>
+          <div class="course-option" data-value="بكالوريا (ثانوية عامة)">
+            <i class="fas fa-graduation-cap"></i>
+            بكالوريا
+            <span class="check-mark">✔</span>
+          </div>
+        </div>
+        <input type="hidden" id="regCourse" required>
 
         <button type="submit" class="btn-submit">سجل الآن</button>
       </form>
@@ -2316,6 +2420,9 @@
       function openModal() {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        // Reset selection
+        document.querySelectorAll('.course-option').forEach(el => el.classList.remove('selected'));
+        document.getElementById('regCourse').value = '';
       }
 
       function closeModal() {
@@ -2335,6 +2442,21 @@
         });
       });
 
+      // ===== COURSE SELECTION (Cards) =====
+      const courseOptions = document.querySelectorAll('.course-option');
+      const regCourseInput = document.getElementById('regCourse');
+
+      courseOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected from all
+          courseOptions.forEach(opt => opt.classList.remove('selected'));
+          // Add selected to this
+          this.classList.add('selected');
+          // Set hidden input value
+          regCourseInput.value = this.dataset.value;
+        });
+      });
+
       // ===== REGISTER FORM (Formspree) =====
       const FORMSPREE_URL = 'https://formspree.io/f/mvznyklr';
 
@@ -2346,10 +2468,10 @@
         const city = document.getElementById('regCity').value.trim();
         const governorate = document.getElementById('regGovernorate').value.trim();
         const email = document.getElementById('regEmail').value.trim();
-        const course = document.getElementById('regCourse').value;
+        const course = regCourseInput.value;
 
         if (!name || !parentPhone || !studentPhone || !city || !governorate || !email || !course) {
-          showToast('الرجاء ملء جميع الحقول', 'error');
+          showToast('الرجاء ملء جميع الحقول واختيار الكورس', 'error');
           return;
         }
         if (!email.includes('@')) {
@@ -2381,6 +2503,9 @@
             showToast('✅ تم التسجيل بنجاح! سيتم التواصل معك قريباً.', 'success');
             closeModal();
             this.reset();
+            // Reset course selection
+            document.querySelectorAll('.course-option').forEach(el => el.classList.remove('selected'));
+            regCourseInput.value = '';
           } else {
             const result = await response.json();
             showToast(result.error || 'حدث خطأ في الإرسال، حاول مرة أخرى.', 'error');
