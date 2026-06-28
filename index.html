@@ -803,7 +803,219 @@
       border: 1px solid rgba(168, 85, 247, 0.06);
     }
 
-    /* ===== VISION ===== */
+    /* ===== TRACKS (المسارات) ===== */
+    .tracks {
+      background: var(--bg-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .track-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .track-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-card);
+    }
+
+    .track-card:hover::after {
+      opacity: 1;
+    }
+
+    .track-card i {
+      font-size: 2.8rem;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .track-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .track-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== COMPUTER SECTION (عصري وجذاب) ===== */
+    .computer-section {
+      background: var(--bg-primary);
+      padding: 70px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .computer-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      cursor: pointer;
+      padding: 40px 30px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .computer-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      padding: 2px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet), var(--cyan));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.2;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .computer-wrapper:hover::before {
+      opacity: 0.6;
+    }
+
+    .computer-wrapper:hover {
+      transform: scale(1.02) translateY(-4px);
+      border-color: rgba(0, 212, 255, 0.2);
+      box-shadow: 0 20px 80px rgba(0, 212, 255, 0.1);
+    }
+
+    .computer-icon-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .computer-icon-wrap i {
+      font-size: 5.5rem;
+      color: var(--cyan);
+      animation: float-computer 3.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.2));
+      transition: all 0.4s ease;
+      z-index: 2;
+    }
+
+    .computer-wrapper:hover .computer-icon-wrap i {
+      color: var(--violet);
+      filter: drop-shadow(0 0 50px rgba(168, 85, 247, 0.3));
+      transform: scale(1.05) rotate(-3deg);
+    }
+
+    .computer-icon-wrap::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0,212,255,0.15), transparent 70%);
+      border-radius: 50%;
+      animation: pulse-glow 3s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .computer-wrapper h3 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .computer-wrapper p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 400px;
+      text-align: center;
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+    }
+
+    .computer-wrapper .click-hint {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+      background: rgba(255,255,255,0.03);
+      padding: 6px 18px;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .computer-wrapper:hover .click-hint {
+      background: rgba(0, 212, 255, 0.05);
+      border-color: rgba(0, 212, 255, 0.1);
+      color: var(--cyan);
+    }
+
+    @keyframes float-computer {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-16px) scale(1.02); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* ===== VISION (الرؤية المستقبلية) ===== */
     .vision {
       background: var(--bg-secondary);
       border-top: 1px solid rgba(255, 255, 255, 0.02);
@@ -1031,73 +1243,6 @@
       margin-top: 4px;
     }
 
-    /* ===== NEW: WHAT YOU'LL LEARN (replacing SWOT) ===== */
-    .learn {
-      background: var(--bg-primary);
-    }
-
-    .learn-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-      margin-top: 20px;
-    }
-
-    .learn-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius);
-      padding: 30px 28px;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .learn-card:hover {
-      transform: translateY(-6px);
-      background: var(--bg-card-hover);
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow-card);
-    }
-
-    .learn-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--violet));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .learn-card:hover::after {
-      opacity: 1;
-    }
-
-    .learn-card i {
-      font-size: 2.2rem;
-      color: var(--cyan);
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .learn-card h4 {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .learn-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
     /* ===== FOOTER ===== */
     .footer {
       background: var(--bg-primary);
@@ -1118,6 +1263,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 40px;
+      align-items: center;
     }
 
     .footer-brand .logo {
@@ -1131,102 +1277,33 @@
       font-style: italic;
     }
 
-    .footer-forms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      flex: 1;
-      justify-content: flex-end;
-    }
-
-    .footer-form {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius-sm);
-      padding: 20px 24px;
-      min-width: 220px;
-      max-width: 300px;
-    }
-
-    .footer-form h4 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .footer-form input,
-    .footer-form textarea {
-      width: 100%;
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-glass);
-      border-radius: 8px;
-      color: #fff;
-      font-size: 0.85rem;
-      outline: none;
-      transition: 0.3s;
-      margin-bottom: 10px;
-      font-family: inherit;
-    }
-
-    .footer-form input:focus,
-    .footer-form textarea:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
-    }
-
-    .footer-form textarea {
-      resize: vertical;
-      min-height: 60px;
-    }
-
-    .footer-form button {
-      padding: 8px 20px;
-      border: none;
-      border-radius: 40px;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 0.8rem;
-    }
-
-    .footer-form button:hover {
-      opacity: 0.85;
-      transform: scale(1.02);
-    }
-
     .footer-social {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .footer-social a {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-secondary);
       transition: all 0.3s ease;
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
 
     .footer-social a:hover {
-      background: rgba(0, 212, 255, 0.06);
+      background: rgba(0, 212, 255, 0.08);
       color: var(--cyan);
-      border-color: rgba(0, 212, 255, 0.1);
-      transform: translateY(-3px);
+      border-color: rgba(0, 212, 255, 0.15);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.08);
     }
 
     .footer-bottom {
@@ -1423,9 +1500,6 @@
       .compare-grid {
         grid-template-columns: 1fr;
       }
-      .learn-grid {
-        grid-template-columns: 1fr 1fr;
-      }
       .timeline::before {
         display: none;
       }
@@ -1451,13 +1525,10 @@
       .footer-top {
         flex-direction: column;
         align-items: stretch;
+        text-align: center;
       }
-      .footer-forms {
-        justify-content: flex-start;
-      }
-      .footer-form {
-        max-width: 100%;
-        min-width: unset;
+      .footer-social {
+        justify-content: center;
       }
       .future-tracks {
         gap: 15px;
@@ -1465,6 +1536,20 @@
       .future-track {
         min-width: 120px;
         padding: 16px 20px;
+      }
+      .tracks-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+      .computer-wrapper {
+        max-width: 90%;
+        padding: 30px 20px;
+      }
+      .computer-icon-wrap {
+        width: 100px;
+        height: 100px;
+      }
+      .computer-icon-wrap i {
+        font-size: 4.5rem;
       }
     }
 
@@ -1517,9 +1602,6 @@
         grid-template-columns: 1fr;
         max-width: 100%;
       }
-      .learn-grid {
-        grid-template-columns: 1fr;
-      }
       .stats-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -1542,6 +1624,22 @@
       .future-track {
         width: 100%;
         max-width: 280px;
+      }
+      .tracks-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .computer-wrapper {
+        padding: 30px 16px;
+      }
+      .computer-icon-wrap {
+        width: 80px;
+        height: 80px;
+      }
+      .computer-icon-wrap i {
+        font-size: 3.8rem;
+      }
+      .computer-wrapper h3 {
+        font-size: 1.4rem;
       }
     }
 
@@ -1571,6 +1669,21 @@
       }
       .stats-grid .stat-item:last-child {
         grid-column: span 1;
+      }
+      .tracks-grid {
+        grid-template-columns: 1fr;
+      }
+      .computer-icon-wrap {
+        width: 70px;
+        height: 70px;
+      }
+      .computer-icon-wrap i {
+        font-size: 3.2rem;
+      }
+      .footer-social a {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
       }
     }
 
@@ -1604,6 +1717,16 @@
     .reveal-delay-6 {
       transition-delay: 0.6s;
     }
+
+    /* ===== EXTRA ANIMATIONS ===== */
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .float-animation {
+      animation: subtle-float 4s ease-in-out infinite;
+    }
   </style>
 </head>
 <body>
@@ -1623,7 +1746,7 @@
       <ul class="nav-links" id="navLinks" role="menubar">
         <li role="none"><a href="#why" role="menuitem">لماذا codix</a></li>
         <li role="none"><a href="#courses" role="menuitem">البرنامج</a></li>
-        <li role="none"><a href="#learn" role="menuitem">ماذا ستتعلم؟</a></li>
+        <li role="none"><a href="#tracks" role="menuitem">المسارات</a></li>
         <li role="none"><a href="#vision" role="menuitem">الرؤية</a></li>
         <li role="none"><a href="#" class="nav-cta" role="menuitem" id="navStartBtn">🚀 سجل الآن</a></li>
       </ul>
@@ -1739,6 +1862,64 @@
     </div>
   </section>
 
+  <!-- ===== COMPUTER SECTION (عصري وجذاب) ===== -->
+  <section class="computer-section" id="computerSection">
+    <div class="container">
+      <div class="computer-wrapper" id="computerWrapper">
+        <div class="computer-icon-wrap">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3>استكشف محتوياتنا</h3>
+        <p>انقر على الكمبيوتر لتنتقل مباشرة إلى جميع مساراتنا التعليمية المصممة خصيصاً لك.</p>
+        <span class="click-hint"><i class="fas fa-hand-pointer"></i> اضغط هنا</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRACKS (المسارات بالإنجليزية) ===== -->
+  <section class="tracks" id="tracks">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-badge">مساراتنا</span>
+        <h2 class="section-title">اختر مسارك الآن</h2>
+        <p class="section-sub mx-auto">نقدم لك مجموعة من المسارات المتخصصة لتجد ما يناسب شغفك ومستقبلك.</p>
+      </div>
+
+      <div class="tracks-grid">
+        <div class="track-card reveal reveal-delay-1">
+          <i class="fas fa-code"></i>
+          <h4>Basics of Programming</h4>
+          <p>للمبتدئين وطلاب السنة الأولى، تأسيس قوي في المنطق والخوارزميات.</p>
+        </div>
+        <div class="track-card reveal reveal-delay-2">
+          <i class="fas fa-chart-bar"></i>
+          <h4>Data Analysis</h4>
+          <p>تعلم استخراج الرؤى من البيانات باستخدام Python وأدوات التحليل.</p>
+        </div>
+        <div class="track-card reveal reveal-delay-3">
+          <i class="fas fa-laptop-code"></i>
+          <h4>Front-End</h4>
+          <p>بناء واجهات مستخدم جذابة وتفاعلية باستخدام HTML، CSS، JavaScript.</p>
+        </div>
+        <div class="track-card reveal reveal-delay-4">
+          <i class="fas fa-server"></i>
+          <h4>Back-End</h4>
+          <p>تطوير الخوادم وقواعد البيانات وإنشاء APIs قوية باستخدام Node.js أو Django.</p>
+        </div>
+        <div class="track-card reveal reveal-delay-5">
+          <i class="fas fa-paint-brush"></i>
+          <h4>UI &amp; UX</h4>
+          <p>تصميم واجهات وتجارب مستخدم جذابة وسهلة الاستخدام، مع التركيز على احتياجات المستخدم.</p>
+        </div>
+        <div class="track-card reveal reveal-delay-6">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>Baccalaureate Programming</h4>
+          <p>مسار مخصص لطلاب البكالوريا، يغطي المنهج والمشاريع المتقدمة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== COURSES (البرنامج الأساسي) ===== -->
   <section class="courses" id="courses">
     <div class="container">
@@ -1768,44 +1949,7 @@
     </div>
   </section>
 
-  <!-- ===== NEW: WHAT YOU'LL LEARN (replaces SWOT) ===== -->
-  <section class="learn" id="learn">
-    <div class="container">
-      <div class="section-header text-center reveal">
-        <span class="section-badge">محتوى البرنامج</span>
-        <h2 class="section-title">ماذا ستتعلم؟</h2>
-        <p class="section-sub mx-auto">نغطي المهارات الأساسية التي تحتاجها لتصبح مبرمجاً واثقاً.</p>
-      </div>
-
-      <div class="learn-grid">
-        <div class="learn-card reveal reveal-delay-1">
-          <i class="fas fa-python"></i>
-          <h4>أساسيات بايثون</h4>
-          <p>المتغيرات، الحلقات، الشروط، الدوال — نبني بها أولى خطواتك البرمجية.</p>
-        </div>
-
-        <div class="learn-card reveal reveal-delay-2">
-          <i class="fas fa-project-diagram"></i>
-          <h4>الخوارزميات والمنطق</h4>
-          <p>نتعلم كيف نفكر لحل المشكلات بطريقة منظمة، ونطبق ذلك في تمارين عملية.</p>
-        </div>
-
-        <div class="learn-card reveal reveal-delay-3">
-          <i class="fas fa-laptop-code"></i>
-          <h4>مشاريع حقيقية</h4>
-          <p>نبني ألعاباً، تطبيقات بسيطة، ومواقع باستخدام ما تعلمناه، خطوة بخطوة.</p>
-        </div>
-
-        <div class="learn-card reveal reveal-delay-4">
-          <i class="fas fa-users-cog"></i>
-          <h4>مهارات حل المشكلات</h4>
-          <p>نطوّر قدرتك على تحليل المشكلات واقتراح الحلول، كما يفعل المهندسون.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VISION (الرؤية المستقبلية) ===== -->
+  <!-- ===== VISION ===== -->
   <section class="vision" id="vision">
     <div class="container">
       <div class="vision-content reveal">
@@ -1940,35 +2084,12 @@
             <span>codix</span>
           </a>
           <p class="tagline">“برمجة بمنظور مستقبلي”</p>
-          <div class="footer-social" style="margin-top:16px;">
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-          </div>
         </div>
 
-        <div class="footer-forms">
-          <!-- نموذج التواصل -->
-          <div class="footer-form">
-            <h4><i class="fas fa-envelope"></i> تواصل معنا</h4>
-            <form id="contactForm">
-              <input type="text" id="contactName" placeholder="الاسم" required>
-              <input type="email" id="contactEmail" placeholder="البريد الإلكتروني" required>
-              <textarea id="contactMsg" placeholder="رسالتك..." required></textarea>
-              <button type="submit">إرسال</button>
-            </form>
-          </div>
-
-          <!-- نموذج النشرة البريدية -->
-          <div class="footer-form">
-            <h4><i class="fas fa-newspaper"></i> اشترك في النشرة</h4>
-            <form id="subscribeForm">
-              <input type="email" id="subscribeEmail" placeholder="بريدك الإلكتروني" required>
-              <button type="submit">اشتراك</button>
-            </form>
-          </div>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1EqSZM7DYk/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/codix_academy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/Codix_acadmy" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
 
@@ -2140,6 +2261,19 @@
         });
       });
 
+      // ===== COMPUTER CLICK -> SCROLL TO TRACKS =====
+      document.getElementById('computerWrapper').addEventListener('click', function() {
+        const tracksSection = document.getElementById('tracks');
+        if (tracksSection) {
+          tracksSection.scrollIntoView({ behavior: 'smooth' });
+          tracksSection.style.transition = 'box-shadow 0.6s ease';
+          tracksSection.style.boxShadow = '0 0 80px rgba(0, 212, 255, 0.15)';
+          setTimeout(() => {
+            tracksSection.style.boxShadow = 'none';
+          }, 1000);
+        }
+      });
+
       // ===== TOAST =====
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toastMessage');
@@ -2174,7 +2308,6 @@
         if (e.target === this) closeModal();
       });
 
-      // ربط الأزرار بفتح المودال
       document.querySelectorAll('#heroStartBtn, #navStartBtn').forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
@@ -2232,70 +2365,6 @@
           }
         } catch (error) {
           showToast('فشل الاتصال بالخادم، تحقق من اتصالك.', 'error');
-        }
-      });
-
-      // ===== CONTACT FORM (Formspree) =====
-      document.getElementById('contactForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const name = document.getElementById('contactName').value.trim();
-        const email = document.getElementById('contactEmail').value.trim();
-        const message = document.getElementById('contactMsg').value.trim();
-
-        if (!name || !email || !message) {
-          showToast('الرجاء ملء جميع الحقول', 'error');
-          return;
-        }
-
-        try {
-          const response = await fetch(FORMSPREE_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({ name, email, message })
-          });
-
-          if (response.ok) {
-            showToast('✅ تم إرسال رسالتك بنجاح!', 'success');
-            this.reset();
-          } else {
-            showToast('حدث خطأ، حاول مرة أخرى.', 'error');
-          }
-        } catch {
-          showToast('فشل الاتصال بالخادم.', 'error');
-        }
-      });
-
-      // ===== SUBSCRIBE FORM (Formspree) =====
-      document.getElementById('subscribeForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('subscribeEmail').value.trim();
-
-        if (!email) {
-          showToast('الرجاء إدخال البريد الإلكتروني', 'error');
-          return;
-        }
-
-        try {
-          const response = await fetch(FORMSPREE_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({ email, subject: 'Newsletter Subscription' })
-          });
-
-          if (response.ok) {
-            showToast('✅ تم الاشتراك بنجاح!', 'success');
-            this.reset();
-          } else {
-            showToast('حدث خطأ، حاول مرة أخرى.', 'error');
-          }
-        } catch {
-          showToast('فشل الاتصال بالخادم.', 'error');
         }
       });
 
